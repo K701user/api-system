@@ -196,18 +196,18 @@ def summarize():
 @app.route('/add-record', methods=['GET'])
 def add_record():
     json_dict = {}
-    day = ""
     ra = sportslive.RecordAccumulation()
     """Given an date, records add to table ."""
 
     try:
         day = request.args.get('query').split('-')
+        day = datetime.date(int(day[0]), int(day[1]), int(day[2]))
     except:
         pass
 
     if day is None:
         day = datetime.date.today()
-    day = datetime.date(int(day[0]), int(day[1]), int(day[2]))
+
     tdatetime = day.strftime('%Y%m%d')
 
     try:
