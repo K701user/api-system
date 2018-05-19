@@ -169,23 +169,7 @@ paths:
             type: string
         400:
           description: "The query is invalid or missing."
-  "/add-text":
-    get:
-      description: "add text."
-      operationId: "addtext"
-      parameters:
-        -
-          name: query
-          in: query
-          required: true
-          type: string
-      responses:
-        200:
-          description: "Success."
-          schema:
-            type: string
-        400:
-          description: "The query is invalid or missing."definitions:
+definitions:
   echoMessage:
     properties:
       message:
