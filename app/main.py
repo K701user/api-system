@@ -197,6 +197,7 @@ def summarize():
 def add_record():
     json_dict = {}
     ra = sportslive.RecordAccumulation()
+    day = None
     """Given an date, records add to table ."""
 
     try:
