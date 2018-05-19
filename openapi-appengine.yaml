@@ -1,0 +1,267 @@
+# Copyright 2017 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+swagger: "2.0"
+info:
+  title: "sports live"
+  description: "Get the news."
+  version: "1.0.0"
+# This field will be replaced by the deploy_api.sh script.
+host: "deep-equator-204407.appspot.com"
+schemes:
+  - "https"
+paths:
+  "/news-loader":
+    get:
+      description: "Get the news."
+      operationId: "newsload"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+  "/debug/news-loader":
+    get:
+      description: "Get the news."
+      operationId: "newsloaddebug"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+  "/player-loader":
+    get:
+      description: "Get the news."
+      operationId: "playerload"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+  "/debug/player-loader":
+    get:
+      description: "Get the news."
+      operationId: "playerloaddebug"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+    "/webhook":
+    get:
+      description: "webhooks."
+      operationId: "webhook"
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+  "/news-reader":
+    get:
+      description: "Get the news."
+      operationId: "newsread"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+  "/debug/news-reader":
+    get:
+      description: "Get the news."
+      operationId: "newsreaddebug"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+  "/sammarize":
+    get:
+      description: "Sammarize text."
+      operationId: "Sammarize"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+  "/add-record":
+    get:
+      description: "add record text."
+      operationId: "addrecord"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."
+  "/add-text":
+    get:
+      description: "add text."
+      operationId: "addtext"
+      parameters:
+        -
+          name: query
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Success."
+          schema:
+            type: string
+        400:
+          description: "The query is invalid or missing."definitions:
+  echoMessage:
+    properties:
+      message:
+        type: "string"
+  authInfoResponse:
+    properties:
+      id:
+        type: "string"
+      email:
+        type: "string"
+# [START securityDef]
+securityDefinitions:
+  # This section configures basic authentication with an API key.
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+# [END securityDef]
+  # This section configures authentication using Google API Service Accounts
+  # to sign a json web token. This is mostly used for server-to-server
+  # communication.
+  google_jwt:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    # This must match the 'iss' field in the JWT.
+    x-google-issuer: "jwt-client.endpoints.test.google.com"
+    # Update this with your service account's email address.
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/jwk/ct.innovation01@gmail.com"
+    # This must match the "aud" field in the JWT. You can add multiple audiences to accept JWTs from multiple clients.
+    x-google-audiences: "echo.endpoints.test.google.com"
+  # This section configures authentication using Google App Engine default
+  # service account to sign a json web token. This is mostly used for
+  # server-to-server communication.
+  gae_default_service_account:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    # Replace YOUR-CLIENT-PROJECT-ID with your client project ID.
+    x-google-issuer: "sports-agent-199307@appspot.gserviceaccount.com"
+    # Replace YOUR-CLIENT-PROJECT-ID with your client project ID.
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sports-agent-199307@appspot.gserviceaccount.com"
+    # This must match the "aud" field in the JWT. You can add multiple audiences to accept JWTs from multiple clients.
+    x-google-audiences: "echo.endpoints.sample.google.com"
+  # This section configures authentication using a service account
+  # to sign a json web token. This is mostly used for server-to-server
+  # communication.
+  google_service_account:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    # Replace YOUR-SERVICE-ACCOUNT-EMAIL with your service account email.
+    x-google-issuer: "ct.innovation01@gmail.com"
+    # Replace YOUR-SERVICE-ACCOUNT-EMAIL with your service account email.
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/ct.innovation01@gmail.com"
+    # This must match the "aud" field in the JWT. You can add multiple audiences to accept JWTs from multiple clients.
+    x-google-audiences: "echo.endpoints.sample.google.com"
+  # This section configures authentication using Google OAuth2 ID Tokens.
+  # ID Tokens can be obtained using OAuth2 clients, and can be used to access
+  # your API on behalf of a particular user.
+  google_id_token:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "https://accounts.google.com"
+    x-google-jwks_uri: "https://www.googleapis.com/oauth2/v3/certs"
+    # Your OAuth2 client's Client ID must be added here. You can add multiple client IDs to accept tokens form multiple clients.
+    x-google-audiences: "sports-agent-199307"
+  # This section configures authentication using Firebase Auth.
+  # [START firebaseAuth]
+  firebase:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "https://securetoken.google.com/sports-agent-199307"
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+    x-google-audiences: "sports-agent-199307"
+  # [END firebaseAuth]
+

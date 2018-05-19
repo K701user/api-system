@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "deep-equator-204407",
+  "private_key_id": "9947da5a214858f782b0b5661261c16dbedb13a2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGYAQ4Ha9fsB6B\nnB5U4Fm8hdzmmpoX3k8dKUWddBELfl9lvMHnsbCjk4QfTC2ILw7Ppz/q5mB6B1Ue\n9N1AeT1lWAgZPq7DV7DAmpz8oXPYjgStnoajl/nCxaeD/vhIAb07XxB3y78cB92X\nQpAtEWRHP/cXId/H7yclszr096H6EZd5adiujTWdXAuvb1ilFLyeLUcz3N3gXV8x\nbTW4ia8SZYazWzQAWoy5+O7+vpFsI+s9KZEh1DFZqhdHbI83kCJ3TfonWAd3a79D\nQOISyxcqMBAXHna7fIK7cK9lF5yduOknjqBO3e04b3C+O9AJF7hvYucrd6tAq3HM\n4x4+2SHhAgMBAAECggEABZZsKzOKDUfV6gGLTQmXxxRCDAxksIsWYmNCHcF7rY7E\nZCAM71yIflfSu9oDfE8Ce7DMWRDWNDzrxMUE91GB2htJLC2px+tlf9Sp/SNIQ+TE\n+QflPFxXAZqf1+6FToVjFilDGJXLsRdmKL/7H9hAdqtONHLl2C1XrNdF68D1NiAr\nbal9i+KITarOR20yJAuymxlFloXsRDDC2IwmXMkA2atCp06o4i9Cm8/WRSEx7jj5\nX+8adEBVN+JK3ki9iE4fBWTP+iH77jFPMXdfnD32yucxsBeg4wdD1HCAiCVuep+m\nyyF+b2aYFQWmtV2Xp64PgGAjDh8/G1aYHatKmYNM2wKBgQDkbOCdfLv7A9trTERJ\nltKtN/fs1pZgVtbiGg8HehSbW4a6LTSWNLgdT/KlboDEXVjbRBxqmEsiHWOcUSo/\nXTvp7+IRCJGWTz/WjyV3vuPOfU1nGPtvkCu4Baqq5rnTYTNSersO9UraeECKutoX\nDZ2On4YS2OxA0oVqD3VGshlzrwKBgQDeUnvoTv1KFe9NGujnRF2tnt8wGF0HBy4d\nwZ9H1u6q19s6IeyoiqufFlQ7qbsshL7B1Zpdu91LNTlmbTRMWg5FcCagCdgpSVtf\nQ9vhM+UWgoQB1V8mJID5rjvtijXL2r0KPX2dEbTC2/AV8+swdthtXOswFXu1Xb9C\no1xXFtjXbwKBgQDECBg/r5NXmXjNvXcBPHlzBIw1afdFmGDzS2/Id+GFbmfSEQeH\nPJkhNsJDbPD/FCk0i2Bjrm0USup4dUNve6D2Y9K70YG34C0mAlUiTeUNCYXKy6rE\nlJKga+SKpFWnbUxxJTixXpstoHOrWy3dCOdFRev28sjV3JV4bumzkRa8qwKBgFSs\n89aCJ0SNYCxs4GIdDtTu2rDVxrDDklPxB/pzqUlWl3/npdx3nHAmMATdW5XUJVds\nRLQItntLlUYmt7GQ5ziZQ4zW0wa+kteQ3/FBM7LEGQUdwHSlmJ4AN4D8kArJkBCT\nZQFq2f8Rh7rEwUIfMcVNi6IvvINSZmM6FxRwdjxvAoGBANGda2IFG8Ouq3TolJGf\nfDdqB/ngOHrOJ7X1IH5EsvCQajeZwCnFLcd6Q3lngtfO/Xzyikp20d42Ng0k/MNe\ndSG32oufn6BH5G6DrmdGOVKo4YGH8YQdBaelDJp2Y4xqjWHAdZyEdHdBf2iJlog9\n4qd87yB3fCb3ZLk3R5Gqmb2H\n-----END PRIVATE KEY-----\n",
+  "client_email": "sports-agent-642@deep-equator-204407.iam.gserviceaccount.com",
+  "client_id": "117015548741175801002",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sports-agent-642%40deep-equator-204407.iam.gserviceaccount.com"
+}

@@ -1,0 +1,14 @@
+flask
+gunicorn
+Tokenizer
+requests
+BeautifulSoup4
+janome
+requests_oauthlib
+numpy
+networkx
+sklearn
+scipy
+lxml
+google-cloud-bigquery
+google-cloud-storage
