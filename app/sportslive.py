@@ -231,7 +231,7 @@ class SportsLive:
                         WHERE title like '%{2}%' AND _PARTITIONTIME = TIMESTAMP('{1}')
                       """.format(rowcount_str, day, str(keyword))
         try:
-            query_job = client.query(myquery, location='asia-northeast1')
+            query_job = client.query(myquery)
             results = query_job.result()  # Waits for job to complete.
             result_list = list(results)
         except:
@@ -273,7 +273,7 @@ class SportsLive:
                         WHERE name like '%{1}%' AND _PARTITIONTIME = TIMESTAMP('{0}')
                       """.format(day, str(keyword))
 
-        query_job = client.query(myquery, location='asia-northeast1')
+        query_job = client.query(myquery)
         results = query_job.result()  # Waits for job to complete.
         result_list = list(results)
         
@@ -388,16 +388,17 @@ class SportsLive:
         news_dict = {}
         output_text = ""
 
-        if type(fields) == "list":
+        if type(fields) is list:
             field = ",".join(fields)
 
         myquery = """
-                    SELECT {4}
+                    SELECT TOP 1 {4}
                     FROM sportsagent.{2}
                     WHERE {3} like '%{1}%' AND _PARTITIONTIME = TIMESTAMP('{0}')
+                    ORDER BY TIME AS DESC
                   """.format(day, keyword, table, keyfield, field)
 
-        query_job = client.query(myquery, location='asia-northeast1')
+        query_job = client.query(myquery)
         results = query_job.result()  # Waits for job to complete.
         result_list = list(results)
 
@@ -408,6 +409,38 @@ class SportsLive:
                      "source": "apiai-player"}
 
         return json_dict
+
+
+@staticmethod
+def execute_sql2(day, keywords, table, keyfields, fields, debug=False):
+    news_dict = {}
+    output_text = ""
+    where = ""
+
+    if type(fields) is list:
+        field = ",".join(fields)
+
+    for f,k in zip(keyfields,keywords):
+        where += "{0} like '%{1}%' AND".format(f, k)
+
+    myquery = """
+                SELECT TOP 1 {3}
+                FROM sportsagent.{2}
+                WHERE {1} _PARTITIONTIME = TIMESTAMP('{0}')
+                ORDER BY TIME AS DESC
+              """.format(day, where, table, field)
+
+    query_job = client.query(myquery)
+    results = query_job.result()  # Waits for job to complete.
+    result_list = list(results)
+
+    output_text = str(result_list[0][0]) + "は" + str(result_list[0][1]) + "でした"
+
+    json_dict = {"speech": output_text,
+                 "displayText": output_text,
+                 "source": "apiai-player"}
+
+    return json_dict
 
 
 class RecordAccumulation:
@@ -502,7 +535,7 @@ class RecordAccumulation:
     def news_check(self, date):
         news_dict = {}
         output_text = ""
-        news_list = [["title", "url", "Full_text", "row1_text", "row2_text", "row3_text", "row4_text"]]
+        news_list = [["title", "url", "Full_text", "row1_text", "row2_text", "row3_text", "row4_text", "time"]]
         news_tuple = []
 
         for rss in rss_news:
@@ -542,6 +575,7 @@ class RecordAccumulation:
                 analysis_text = self.summarized(text, r_count)
                 output_text = ''.join(analysis_text)
                 news.append(str(output_text))
+                news.append(datetime.datetime.now().strftime('%H%M%S'))
 
             news_list.append(news)
             tnews = tuple(news)
@@ -662,7 +696,6 @@ class RecordAccumulation:
             sentences = "sammarized error"
 
         return sentences
-
 
 
 def main():
