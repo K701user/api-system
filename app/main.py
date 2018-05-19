@@ -199,19 +199,27 @@ def add_record():
     ra = sportslive.RecordAccumulation()
     """Given an date, records add to table ."""
 
-    day = request.args.get('query').split('-')
-    if day is None:
-        day = datetime.date.today()
-    day = datetime.date(int(day[0]), int(day[1]), int(day[2]))
-    tdatetime = day.strftime('%Y%m%d')
-
-    # news取得フェーズ
-    news_record, news_record_tuple = ra.news_check(day)
-    if len(news_record_tuple) != 0:
-        # ra.save_csv(news_record, "news_record.csv")
-        result = load_data("newsrecord${}".format(tdatetime),
-                           news_record_tuple)
-
+    try:
+        day = request.args.get('query').split('-')
+        if day is None:
+            day = datetime.date.today()
+        day = datetime.date(int(day[0]), int(day[1]), int(day[2]))
+        tdatetime = day.strftime('%Y%m%d')
+    
+        # news取得フェーズ
+        news_record, news_record_tuple = ra.news_check(day)
+        if len(news_record_tuple) != 0:
+            # ra.save_csv(news_record, "news_record.csv")
+            result = load_data("newsrecord${}".format(tdatetime),
+                               news_record_tuple)
+    except:
+        json_dict.update({'error':
+                         {
+                         'title':'player get error'
+                         }}
+                         )
+        encode_json_data = json.dumps(json_dict)
+        return encode_json_data
     # player成績取得フェーズ（野球）
     try:
         player_record, player_record_tuple = ra.get_jp_bplayer_record(day)
