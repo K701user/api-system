@@ -215,9 +215,9 @@ securityDefinitions:
     flow: "implicit"
     type: "oauth2"
     # Replace YOUR-CLIENT-PROJECT-ID with your client project ID.
-    x-google-issuer: "sports-agent-199307@appspot.gserviceaccount.com"
+    x-google-issuer: "sdeep-equator-204407@appspot.gserviceaccount.com"
     # Replace YOUR-CLIENT-PROJECT-ID with your client project ID.
-    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sports-agent-199307@appspot.gserviceaccount.com"
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/deep-equator-204407@appspot.gserviceaccount.com"
     # This must match the "aud" field in the JWT. You can add multiple audiences to accept JWTs from multiple clients.
     x-google-audiences: "echo.endpoints.sample.google.com"
   # This section configures authentication using a service account
@@ -243,15 +243,15 @@ securityDefinitions:
     x-google-issuer: "https://accounts.google.com"
     x-google-jwks_uri: "https://www.googleapis.com/oauth2/v3/certs"
     # Your OAuth2 client's Client ID must be added here. You can add multiple client IDs to accept tokens form multiple clients.
-    x-google-audiences: "sports-agent-199307"
+    x-google-audiences: "deep-equator-204407"
   # This section configures authentication using Firebase Auth.
   # [START firebaseAuth]
   firebase:
     authorizationUrl: ""
     flow: "implicit"
     type: "oauth2"
-    x-google-issuer: "https://securetoken.google.com/sports-agent-199307"
+    x-google-issuer: "https://securetoken.google.com/deep-equator-204407"
     x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
-    x-google-audiences: "sports-agent-199307"
+    x-google-audiences: "deep-equator-204407"
   # [END firebaseAuth]
 
