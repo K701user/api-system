@@ -561,7 +561,7 @@ class RecordAccumulation:
             news_key_list = [l for l in news_dict.keys()]
         except:
             raise NameError("get errors?")
-        
+
         try:
             for list_key in news_key_list:
                 news = [str(list_key), str(news_dict[list_key])]
