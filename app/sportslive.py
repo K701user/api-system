@@ -562,8 +562,8 @@ class RecordAccumulation:
         except:
             raise NameError("get?")
 
-        try:
-            for list_key in news_key_list:
+        for list_key in news_key_list:
+            try:
                 news = [str(list_key), str(news_dict[list_key])]
                 if "（" in list_key or "(" in list_key:
                     n_title = re.sub(pattern, '', list_key)
@@ -571,25 +571,22 @@ class RecordAccumulation:
                 text = ""
                 resp = requests.get(news_dict[list_key])
                 soup = BeautifulSoup(resp.text, "html.parser")
+            except:
+                raise NameError("errors?")
 
-                for s in soup.find_all("p", class_="ynDetailText"):
-                    text += s.get_text()
+            for s in soup.find_all("p", class_="ynDetailText"):
+                text += s.get_text()
 
-                news.append(text)
-                for r_count in range(1, 5):
-                    analysis_text = self.summarized(text, r_count)
-                    output_text = ''.join(analysis_text)
-                    news.append(str(output_text))
-                    try:
-                        news.append(datetime.datetime.now().strftime('%H%M%S'))
-                    except:
-                        raise NameError("date?")
+            news.append(text)
+            for r_count in range(1, 5):
+                analysis_text = self.summarized(text, r_count)
+                output_text = ''.join(analysis_text)
+                news.append(str(output_text))
+                news.append(datetime.datetime.now().strftime('%H%M%S'))
 
-                news_list.append(news)
-                tnews = tuple(news)
-                news_tuple.append(tnews)
-        except:
-            raise NameError("errors?")
+            news_list.append(news)
+            tnews = tuple(news)
+            news_tuple.append(tnews)
         return news_list, news_tuple
 
     """v2 current"""
