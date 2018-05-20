@@ -580,7 +580,10 @@ class RecordAccumulation:
                     analysis_text = self.summarized(text, r_count)
                     output_text = ''.join(analysis_text)
                     news.append(str(output_text))
-                    news.append(datetime.datetime.now().strftime('%H%M%S'))
+                    try:
+                        news.append(datetime.datetime.now().strftime('%H%M%S'))
+                    except:
+                        raise NameError("date?")
 
                 news_list.append(news)
                 tnews = tuple(news)

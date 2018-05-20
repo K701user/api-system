@@ -47,8 +47,8 @@
       <file leaf-file-name="sportslive.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/sportslive.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="586" column="40" selection-start-line="586" selection-start-column="40" selection-end-line="586" selection-end-column="40" />
+            <state relative-caret-position="498">
+              <caret line="585" column="45" selection-start-line="585" selection-start-column="45" selection-end-line="585" selection-end-column="45" />
               <folding>
                 <element signature="e#15#25#0" expanded="true" />
               </folding>
@@ -347,12 +347,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/app/sportslive.py</url>
-          <line>692</line>
+          <line>695</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/app/sportslive.py</url>
-          <line>639</line>
+          <line>642</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -413,8 +413,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/sportslive.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="586" column="40" selection-start-line="586" selection-start-column="40" selection-end-line="586" selection-end-column="40" />
+        <state relative-caret-position="498">
+          <caret line="585" column="45" selection-start-line="585" selection-start-column="45" selection-end-line="585" selection-end-column="45" />
           <folding>
             <element signature="e#15#25#0" expanded="true" />
           </folding>
