@@ -559,7 +559,10 @@ class RecordAccumulation:
                         news_dict.update({title.text: str(link.next).replace('\n', '').replace(' ', '')})
 
             news_key_list = [l for l in news_dict.keys()]
-
+        except:
+            raise NameError("get errors?")
+        
+        try:
             for list_key in news_key_list:
                 news = [str(list_key), str(news_dict[list_key])]
                 if "（" in list_key or "(" in list_key:
