@@ -4,8 +4,8 @@ import calendar
 import datetime
 import json
 import random
+import re
 
-import itertools
 import requests
 
 from bs4 import BeautifulSoup
@@ -533,6 +533,7 @@ class RecordAccumulation:
 
     """v2 current"""
     def news_check(self, date):
+        pattern = r'（.*）'
         news_dict = {}
         output_text = ""
         news_list = [["title", "url", "Full_text", "row1_text", "row2_text", "row3_text", "row4_text", "time"]]
@@ -561,8 +562,8 @@ class RecordAccumulation:
 
             for list_key in news_key_list:
                 news = [str(list_key), str(news_dict[list_key])]
-                if "(" in list_key:
-                    n_title = list_key[0:list_key.index("(")]
+                if "（" in list_key or "(" in list_key:
+                    n_title = re.sub(pattern, '', list_key)
                     news[0] = n_title
                 text = ""
                 resp = requests.get(news_dict[list_key])
@@ -702,8 +703,9 @@ class RecordAccumulation:
 
 def main():
     RA = RecordAccumulation()
-    today = datetime.date(2018, 4, 18)
-    test = RA.get_jp_s_score(today)
+    today = datetime.date(2018, 5, 19)
+
+    test = RA.get_jp_b_score(today)
 
 
 if __name__ == '__main__':
