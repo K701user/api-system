@@ -538,49 +538,51 @@ class RecordAccumulation:
         news_list = [["title", "url", "Full_text", "row1_text", "row2_text", "row3_text", "row4_text", "time"]]
         news_tuple = []
 
-        for rss in rss_news:
-            resp = requests.get(rss)
-            soup = BeautifulSoup(resp.text, "html.parser")
+        try:
+            for rss in rss_news:
+                resp = requests.get(rss)
+                soup = BeautifulSoup(resp.text, "html.parser")
 
-            items = soup.find_all("item")
+                items = soup.find_all("item")
 
-            for item in items:
-                title = item.find_all("title")[0]
-                link = item.find_all("link")[0]
-                day = item.find_all("pubdate")[0].text
+                for item in items:
+                    title = item.find_all("title")[0]
+                    link = item.find_all("link")[0]
+                    day = item.find_all("pubdate")[0].text
 
-                news_date = day.split(" ")
-                news_date = datetime.date(int(news_date[3]),
-                                          int(months[news_date[2]]),
-                                          int(news_date[1]))
-                if date == news_date:
-                    news_dict.update({title.text: str(link.next).replace('\n', '').replace(' ', '')})
+                    news_date = day.split(" ")
+                    news_date = datetime.date(int(news_date[3]),
+                                              int(months[news_date[2]]),
+                                              int(news_date[1]))
+                    if date == news_date:
+                        news_dict.update({title.text: str(link.next).replace('\n', '').replace(' ', '')})
 
-        news_key_list = [l for l in news_dict.keys()]
+            news_key_list = [l for l in news_dict.keys()]
 
-        for list_key in news_key_list:
-            news = [str(list_key), str(news_dict[list_key])]
-            if "(" in list_key:
-                n_title = list_key[0:list_key.index("(")]
-                news[0] = n_title
-            text = ""
-            resp = requests.get(news_dict[list_key])
-            soup = BeautifulSoup(resp.text, "html.parser")
+            for list_key in news_key_list:
+                news = [str(list_key), str(news_dict[list_key])]
+                if "(" in list_key:
+                    n_title = list_key[0:list_key.index("(")]
+                    news[0] = n_title
+                text = ""
+                resp = requests.get(news_dict[list_key])
+                soup = BeautifulSoup(resp.text, "html.parser")
 
-            for s in soup.find_all("p", class_="ynDetailText"):
-                text += s.get_text()
+                for s in soup.find_all("p", class_="ynDetailText"):
+                    text += s.get_text()
 
-            news.append(text)
-            for r_count in range(1, 5):
-                analysis_text = self.summarized(text, r_count)
-                output_text = ''.join(analysis_text)
-                news.append(str(output_text))
-                news.append(datetime.datetime.now().strftime('%H%M%S'))
+                news.append(text)
+                for r_count in range(1, 5):
+                    analysis_text = self.summarized(text, r_count)
+                    output_text = ''.join(analysis_text)
+                    news.append(str(output_text))
+                    news.append(datetime.datetime.now().strftime('%H%M%S'))
 
-            news_list.append(news)
-            tnews = tuple(news)
-            news_tuple.append(tnews)
-
+                news_list.append(news)
+                tnews = tuple(news)
+                news_tuple.append(tnews)
+        except:
+            raise NameError("get errors?")
         return news_list, news_tuple
 
     """v2 current"""

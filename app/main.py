@@ -218,10 +218,11 @@ def add_record():
             # ra.save_csv(news_record, "news_record.csv")
             result = load_data("newsrecord${}".format(tdatetime),
                                news_record_tuple)
-    except:
+    except Exception as e:
         json_dict.update({'error':
                          {
-                         'title':'player get error'
+                         'title':'news get error',
+                             "text": e.args
                          }}
                          )
         encode_json_data = json.dumps(json_dict)
@@ -245,7 +246,7 @@ def add_record():
     except:
         json_dict.update({'error':
                          {
-                         'text':"load error player",
+                         'text':"load error player b",
                          'list':player_record_tuple
                          }}
                          )
@@ -258,7 +259,7 @@ def add_record():
     except:
         json_dict.update({'error':
             {
-                'title': 'score get error'
+                'title': 'score get error b'
             }}
         )
         encode_json_data = json.dumps(json_dict)
@@ -270,7 +271,7 @@ def add_record():
     except:
         json_dict.update({'error':
             {
-                'text': "load error player",
+                'text': "load error score b",
                 'list': player_record_tuple
             }}
         )
@@ -283,7 +284,7 @@ def add_record():
     except:
         json_dict.update({'error':
             {
-                'title': 'score get error'
+                'title': 'score get error s'
             }}
         )
         encode_json_data = json.dumps(json_dict)
@@ -295,7 +296,7 @@ def add_record():
     except:
         json_dict.update({'error':
             {
-                'text': "load error player",
+                'text': "load error score",
                 'list': player_record_tuple
             }}
         )
