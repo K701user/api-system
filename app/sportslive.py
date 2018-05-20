@@ -560,7 +560,7 @@ class RecordAccumulation:
 
             news_key_list = [l for l in news_dict.keys()]
         except:
-            raise NameError("get errors?")
+            raise NameError("get?")
 
         try:
             for list_key in news_key_list:
@@ -586,7 +586,7 @@ class RecordAccumulation:
                 tnews = tuple(news)
                 news_tuple.append(tnews)
         except:
-            raise NameError("get errors?")
+            raise NameError("errors?")
         return news_list, news_tuple
 
     """v2 current"""
