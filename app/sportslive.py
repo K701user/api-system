@@ -582,8 +582,8 @@ class RecordAccumulation:
                 analysis_text = self.summarized(text, r_count)
                 output_text = ''.join(analysis_text)
                 news.append(str(output_text))
-                news.append(datetime.datetime.now().strftime('%H%M%S'))
-
+            
+            news.append(datetime.datetime.now().strftime('%H%M%S'))
             news_list.append(news)
             tnews = tuple(news)
             news_tuple.append(tnews)
@@ -627,8 +627,8 @@ class RecordAccumulation:
 
             # の成績
             try:
-                td_home = soup.findAll("td", class_="home goal")
-                td_away = soup.findAll("td", class_="away goal")
+                td_home = soup.find("td", class_="home goal")
+                td_away = soup.find("td", class_="away goal")
                 record.append(td_home.string + "-" + td_away.string)
             except:
                 continue
@@ -671,23 +671,25 @@ class RecordAccumulation:
                 trs = soup.findAll("tr", class_="yjMS")
 
                 for tr in trs:
-                    b_tag = tr.findAll("b")
+                    b_tag = tr.find("b")
                     names.append(b_tag.string)
-                    td = tr.findAll("td", class_="sum")
+                    td = tr.find("td", class_="sum")
                     score.append(td.string)
 
             except:
                 continue
+            
+            try:
+                record.append(names[0])
+                record.append(names[1])
+                record.append(strdate)
+                record.append(datetime.datetime.now().strftime('%H%M%S'))
+                record.append(score[0] + "-" + score[1])
 
-            record.append(names[0])
-            record.append(names[1])
-            record.append(strdate)
-            record.append(datetime.datetime.now().strftime('%H%M%S'))
-            record.append(score[0] + "-" + score[1])
-
-            rec_list.append(record)
-            rec_tuple.append(tuple(record))
-
+                rec_list.append(record)
+                rec_tuple.append(tuple(record))
+            except:
+                pass
             i += 1
 
         return rec_list, rec_tuple
