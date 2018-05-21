@@ -575,7 +575,7 @@ class RecordAccumulation:
                 raise NameError("errors?")
 
             for s in soup.find_all("p", class_="ynDetailText"):
-                text += s.get_text()
+                text += s.get_text().replace('\n', '').replace(' ', '')
 
             news.append(text)
             for r_count in range(1, 5):
