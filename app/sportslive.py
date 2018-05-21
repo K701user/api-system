@@ -434,7 +434,10 @@ def execute_sql2(day, keywords, table, keyfields, fields, debug=False):
     results = query_job.result()  # Waits for job to complete.
     result_list = list(results)
 
-    output_text = str(result_list[0][0]) + "は" + str(result_list[0][1]) + "でした"
+    if len(result_list) > 0:
+        output_text = keywords[0] + "と" + keywords[1] + "の試合結果は" + str(result_list[0][1]) + "でした"
+    else:
+        return {}
 
     json_dict = {"speech": output_text,
                  "displayText": output_text,

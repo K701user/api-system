@@ -353,6 +353,14 @@ def processRequest(req):
         team2 = parameters.get("SoccerTeamName_for_Japan1")
     except:
         pass
+    try:
+        team1 = parameters.get("BaseballTeamName_for_Japan")
+    except:
+        pass
+    try:
+        team2 = parameters.get("BaseballTeamName_for_Japan1")
+    except:
+        pass
     if date is None:
         date = datetime.datetime.now().strftime('%Y%m%d')
     else:
@@ -364,6 +372,9 @@ def processRequest(req):
         res = SL.execute_sql(date, name, "newsrecord", "name", ["title", "row2_text"])
     elif actiontype == "reply_to_soccer_score" or actiontype == "reply_to_baseball_score":
         res = SL.execute_sql2(date, [team1, team2],"scorerecord", ["team1", "team2"], ["team1", "team2", "score"])
+
+        if res == {}:
+            res = SL.execute_sql2(date, [team2, team1], "scorerecord", ["team1", "team2"], ["team1", "team2", "score"])
     else:
         return {}
 
