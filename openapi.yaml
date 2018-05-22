@@ -92,8 +92,21 @@ paths:
           description: "The query is invalid or missing."
   "/webhook":
     post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - text/xml
+        - text/html
       description: "webhooks."
       operationId: "webhook"
+      parameters:
+        -
+          name: body
+          in: body
+          required: true
+          schema:
+            type: object
       responses:
         200:
           description: "Success."
