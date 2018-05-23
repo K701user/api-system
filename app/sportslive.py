@@ -411,39 +411,39 @@ class SportsLive:
         return json_dict
 
 
-@staticmethod
-def execute_sql2(day, keywords, table, keyfields, fields, debug=False):
-    news_dict = {}
-    output_text = ""
-    where = ""
+    @staticmethod
+    def execute_sql2(day, keywords, table, keyfields, fields, debug=False):
+        news_dict = {}
+        output_text = ""
+        where = ""
 
-    if type(fields) is list:
-        field = ",".join(fields)
+        if type(fields) is list:
+            field = ",".join(fields)
 
-    for f,k in zip(keyfields,keywords):
-        where += "{0} like '%{1}%' AND".format(f, k)
+        for f,k in zip(keyfields,keywords):
+            where += "{0} like '%{1}%' AND".format(f, k)
 
-    myquery = """
+        myquery = """
                 SELECT TOP 1 {3}
                 FROM sportsagent.{2}
                 WHERE {1} _PARTITIONTIME = TIMESTAMP('{0}')
                 ORDER BY TIME AS DESC
-              """.format(day, where, table, field)
+                  """.format(day, where, table, field)
 
-    query_job = client.query(myquery)
-    results = query_job.result()  # Waits for job to complete.
-    result_list = list(results)
+        query_job = client.query(myquery)
+        results = query_job.result()  # Waits for job to complete.
+        result_list = list(results)
 
-    if len(result_list) > 0:
-        output_text = keywords[0] + "と" + keywords[1] + "の試合結果は" + str(result_list[0][1]) + "でした"
-    else:
-        return {}
+        if len(result_list) > 0:
+            output_text = keywords[0] + "と" + keywords[1] + "の試合結果は" + str(result_list[0][1]) + "でした"
+        else:
+            return {}
 
-    json_dict = {"speech": output_text,
+        json_dict = {"speech": output_text,
                  "displayText": output_text,
                  "source": "apiai-player"}
 
-    return json_dict
+        return json_dict
 
 
 class RecordAccumulation:
