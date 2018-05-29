@@ -392,10 +392,10 @@ class SportsLive:
             field = ",".join(fields)
 
         myquery = """
-                    SELECT TOP 1 {4}
+                    SELECT {4}
                     FROM sportsagent.{2}
-                    WHERE {3} like '%{1}%' AND _PARTITIONTIME = TIMESTAMP('{0}')
-                    ORDER BY TIME AS DESC
+                    WHERE {3} like '%{1}%' AND DATE = '{0}'
+                    ORDER BY TIME DESC
                   """.format(day, keyword, table, keyfield, field)
 
         query_job = client.query(myquery)
@@ -411,39 +411,66 @@ class SportsLive:
         return json_dict
 
 
-@staticmethod
-def execute_sql2(day, keywords, table, keyfields, fields, debug=False):
-    news_dict = {}
-    output_text = ""
-    where = ""
+    @staticmethod
+    def execute_sql2(day, keywords, table, keyfields, fields, debug=False):
+        news_dict = {}
+        output_text = ""
+        where = ""
+<<<<<<< HEAD
 
-    if type(fields) is list:
-        field = ",".join(fields)
+        if type(fields) is list:
+            field = ",".join(fields)
 
-    for f,k in zip(keyfields,keywords):
-        where += "{0} like '%{1}%' AND".format(f, k)
+        for f,k in zip(keyfields,keywords):
+            where += "{0} like '%{1}%' AND".format(f, k)
 
-    myquery = """
+        myquery = """
+                    SELECT {3}
+                    FROM sportsagent.{2}
+                    WHERE {1} DATE = '{0}'
+                    ORDER BY TIME DESC
+                  """.format(day, where, table, field)
+        try:
+            query_job = client.query(myquery)
+            results = query_job.result()  # Waits for job to complete.
+            result_list = list(results)
+        except Exception as e:
+            print(e.args)
+=======
+
+        if type(fields) is list:
+            field = ",".join(fields)
+
+        for f,k in zip(keyfields,keywords):
+            where += "{0} like '%{1}%' AND".format(f, k)
+
+        myquery = """
                 SELECT TOP 1 {3}
                 FROM sportsagent.{2}
                 WHERE {1} _PARTITIONTIME = TIMESTAMP('{0}')
                 ORDER BY TIME AS DESC
-              """.format(day, where, table, field)
+                  """.format(day, where, table, field)
 
-    query_job = client.query(myquery)
-    results = query_job.result()  # Waits for job to complete.
-    result_list = list(results)
+        query_job = client.query(myquery)
+        results = query_job.result()  # Waits for job to complete.
+        result_list = list(results)
 
-    if len(result_list) > 0:
-        output_text = keywords[0] + "と" + keywords[1] + "の試合結果は" + str(result_list[0][1]) + "でした"
-    else:
-        return {}
+>>>>>>> 338502a3c54b0f9a412e061a6098fed47e811911
+        if len(result_list) > 0:
+            output_text = keywords[0] + "と" + keywords[1] + "の試合結果は" + str(result_list[0][1]) + "でした"
+        else:
+            return {}
 
-    json_dict = {"speech": output_text,
+        json_dict = {"speech": output_text,
+<<<<<<< HEAD
+                     "displayText": output_text,
+                     "source": "apiai-player"}
+=======
                  "displayText": output_text,
                  "source": "apiai-player"}
+>>>>>>> 338502a3c54b0f9a412e061a6098fed47e811911
 
-    return json_dict
+        return json_dict
 
 
 class RecordAccumulation:
@@ -712,7 +739,9 @@ class RecordAccumulation:
 def main():
     RA = RecordAccumulation()
     today = datetime.date(2018, 5, 19)
-
+    date = today.strftime("%Y%m%d")
+    SL = SportsLive()
+    res = SL.execute_sql2(date, ["中日", "阪神"], "scorerecord", ["team1", "team2"], ["team1", "team2", "score"])
     test = RA.get_jp_b_score(today)
 
 

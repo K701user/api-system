@@ -354,17 +354,21 @@ def processRequest(req):
     except:
         pass
     try:
-        team1 = parameters.get("BaseballTeamName_for_Japan")
+        if team1 is None:
+            team1 = parameters.get("BaseballTeamName_for_Japan")
     except:
         pass
     try:
-        team2 = parameters.get("BaseballTeamName_for_Japan1")
+        if team2 is None:
+            team2 = parameters.get("BaseballTeamName_for_Japan1")
     except:
         pass
     if date is None:
         date = datetime.datetime.now().strftime('%Y%m%d')
+    elif type(date) is list:
+        date = date[0].replace('-', '')
     else:
-        date = date.strftime('%Y%m%d')
+        date = date.replace('-', '')
 
     if actiontype == "reply_to_player_record":
         res = SL.execute_sql(date, name, "bplayerrecord", "name", ["name", "record"])
