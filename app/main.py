@@ -211,6 +211,34 @@ def add_record():
 
     tdatetime = day.strftime('%Y%m%d')
 
+    # player成績取得フェーズ（野球）
+    try:
+        player_record, player_record_tuple = ra.get_jp_bplayer_record(day)
+        # ra.save_csv(player_record, "player_record.csv")
+        if len(player_record_tuple) != 0:
+            result = load_data("bplayerrecord${}".format(tdatetime),
+                           player_record_tuple)
+    except:
+        pass
+
+    # score取得フェーズ(野球)
+    try:
+        score_record, score_record_tuple = ra.get_jp_b_score(day)
+        if len(score_record_tuple) != 0:
+            result = load_data("scorerecord${}".format(tdatetime),
+                           score_record_tuple)
+    except:
+        pass
+    score_record_tuple = []
+    # score取得フェーズ(サッカー)
+    try:
+        score_record, score_record_tuple = ra.get_jp_s_score(day)
+        if len(score_record_tuple) != 0:
+            result = load_data("scorerecord${}".format(tdatetime),
+                           score_record_tuple)
+    except:
+        pass
+    
     try:
         # news取得フェーズ
         news_record, news_record_tuple = ra.news_check(day)
@@ -219,90 +247,8 @@ def add_record():
             result = load_data("newsrecord${}".format(tdatetime),
                                news_record_tuple)
     except Exception as e:
-        json_dict.update({'error':
-                         {
-                         'title':'news get error',
-                             "text": e.args
-                         }}
-                         )
-        encode_json_data = json.dumps(json_dict)
-        return encode_json_data
-    # player成績取得フェーズ（野球）
-    try:
-        player_record, player_record_tuple = ra.get_jp_bplayer_record(day)
-        # ra.save_csv(player_record, "player_record.csv")
-    except:
-        json_dict.update({'error':
-                         {
-                         'title':'player get error'
-                         }}
-                         )
-        encode_json_data = json.dumps(json_dict)
-        return encode_json_data 
+        pass
     
-    try:
-        result = load_data("bplayerrecord${}".format(tdatetime),
-                           player_record_tuple)
-    except:
-        json_dict.update({'error':
-                         {
-                         'text':"load error player b",
-                         'list':player_record_tuple
-                         }}
-                         )
-        encode_json_data = json.dumps(json_dict)
-        return encode_json_data
-
-    # score取得フェーズ(野球)
-    try:
-        score_record, score_record_tuple = ra.get_jp_b_score(day)
-    except:
-        json_dict.update({'error':
-            {
-                'title': 'score get error b'
-            }}
-        )
-        encode_json_data = json.dumps(json_dict)
-        return encode_json_data
-
-    try:
-        result = load_data("scorerecord${}".format(tdatetime),
-                           score_record_tuple)
-    except:
-        json_dict.update({'error':
-            {
-                'text': "load error score b",
-                'list': player_record_tuple
-            }}
-        )
-        encode_json_data = json.dumps(json_dict)
-        return encode_json_data
-
-    # score取得フェーズ(サッカー)
-    try:
-        score_record, score_record_tuple = ra.get_jp_s_score(day)
-    except:
-        json_dict.update({'error':
-            {
-                'title': 'score get error s'
-            }}
-        )
-        encode_json_data = json.dumps(json_dict)
-        return encode_json_data
-
-    try:
-        result = load_data("scorerecord${}".format(tdatetime),
-                           score_record_tuple)
-    except:
-        json_dict.update({'error':
-            {
-                'text': "load error score",
-                'list': player_record_tuple
-            }}
-        )
-        encode_json_data = json.dumps(json_dict)
-        return encode_json_data
-
     json_dict.update({'completed':
                          {
                          'text':player_record_tuple
