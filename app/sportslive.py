@@ -635,10 +635,14 @@ class RecordAccumulation:
                 td_home = soup.find("td", class_="home goal")
                 td_away = soup.find("td", class_="away goal")
                 record.append(td_home.string + "-" + td_away.string)
+                record_rev = [record[1], record[0], record[2], record[3], td_away.string + "-" + td_home.string]
             except:
                 continue
             rec_list.append(record)
+            rec_list.append(record_rev)
+
             rec_tuple.append(tuple(record))
+            rec_tuple.append(tuple(record_rev))
 
             i += 1
 
@@ -690,9 +694,15 @@ class RecordAccumulation:
                 record.append(strdate)
                 record.append(datetime.datetime.now().strftime('%H%M%S'))
                 record.append(score[0] + "-" + score[1])
+                record_rev = [record[1], record[0], record[2], record[3], score[1] + "-" + score[0]]
 
                 rec_list.append(record)
+                rec_list.append(record_rev)
+
                 rec_tuple.append(tuple(record))
+                rec_tuple.append(tuple(record_rev))
+
+
             except:
                 pass
             i += 1
