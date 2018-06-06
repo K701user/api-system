@@ -32,9 +32,9 @@ def newsloader():
     query = querylist[0]
     day = None
     rowcount = None
-    if len(query) >= 2:
+    if len(querylist) >= 2:
         rowcount = int(querylist[1])
-    if len(query) >= 3:
+    if len(querylist) >= 3:
         day = querylist[2]
     
     try:    
@@ -91,9 +91,9 @@ def newsloader_debug():
     query = querylist[0]
     day = None
     rowcount = None
-    if len(query) >= 2:
+    if len(querylist) >= 2:
         rowcount = int(querylist[1])
-    if len(query) >= 3:
+    if len(querylist) >= 3:
         day = querylist[2]
     json_dict = {}
 
@@ -120,7 +120,7 @@ def playerloader():
     querylist = query.split('_')
     query = querylist[0]
     day = None
-    if len(query) > 2:
+    if len(querylist) > 2:
         day = querylist[1]
     json_dict = {}
     
@@ -146,7 +146,7 @@ def playerloader_debug():
     querylist = query.split('_')
     query = querylist[0]
     day = None
-    if len(query) > 2:
+    if len(querylist) > 2:
         day = querylist[1]
     json_dict = {}
 
