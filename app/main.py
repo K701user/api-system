@@ -30,6 +30,8 @@ def newsloader():
     query = request.args.get('query')
     querylist = query.split('_')
     query = querylist[0]
+    day = None
+    rowcount = None
     if len(query) >= 2:
         rowcount = int(querylist[1])
     if len(query) >= 3:
@@ -87,6 +89,8 @@ def newsloader_debug():
     query = request.args.get('query')
     querylist = query.split('_')
     query = querylist[0]
+    day = None
+    rowcount = None
     if len(query) >= 2:
         rowcount = int(querylist[1])
     if len(query) >= 3:
@@ -115,6 +119,7 @@ def playerloader():
     query = request.args.get('query')
     querylist = query.split('_')
     query = querylist[0]
+    day = None
     if len(query) > 2:
         day = querylist[1]
     json_dict = {}
@@ -140,6 +145,7 @@ def playerloader_debug():
     query = request.args.get('query')
     querylist = query.split('_')
     query = querylist[0]
+    day = None
     if len(query) > 2:
         day = querylist[1]
     json_dict = {}
