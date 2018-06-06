@@ -30,8 +30,10 @@ def newsloader():
     query = request.args.get('query')
     querylist = query.split('_')
     query = querylist[0]
-    rowcount = int(querylist[1])
-    day = querylist[2]
+    if len(query) >= 2:
+        rowcount = int(querylist[1])
+    if len(query) >= 3:
+        day = querylist[2]
     
     try:    
         if query is None:
@@ -85,8 +87,10 @@ def newsloader_debug():
     query = request.args.get('query')
     querylist = query.split('_')
     query = querylist[0]
-    rowcount = int(querylist[1])
-    day = querylist[2]
+    if len(query) >= 2:
+        rowcount = int(querylist[1])
+    if len(query) >= 3:
+        day = querylist[2]
     json_dict = {}
 
     if query is None:
@@ -111,7 +115,8 @@ def playerloader():
     query = request.args.get('query')
     querylist = query.split('_')
     query = querylist[0]
-    day = querylist[1]
+    if len(query) > 2:
+        day = querylist[1]
     json_dict = {}
     
     if query is None:
@@ -135,7 +140,8 @@ def playerloader_debug():
     query = request.args.get('query')
     querylist = query.split('_')
     query = querylist[0]
-    day = querylist[1]
+    if len(query) > 2:
+        day = querylist[1]
     json_dict = {}
 
     if query is None:
@@ -317,14 +323,11 @@ def processRequest(req):
         date = date.replace('-', '')
 
     if actiontype == "reply_to_player_record":
-        res = SL.execute_sql(date, name, "bplayerrecord", "name", ["name", "record"])
+        res = SL.execute_sql(name, "bplayerrecord", "name", ["name", "record"], day=date)
     elif actiontype == "reply_to_news":
-        res = SL.execute_sql(date, name, "newsrecord", "name", ["title", "row2_text"])
+        res = SL.execute_sql(name, "newsrecord", "title", ["title", "row2_text"], day=date)
     elif actiontype == "reply_to_soccer_score" or actiontype == "reply_to_baseball_score":
-        res = SL.execute_sql2(date, [team1, team2],"scorerecord", ["team1", "team2"], ["team1", "team2", "score"])
-
-        if res == {}:
-            res = SL.execute_sql2(date, [team2, team1], "scorerecord", ["team1", "team2"], ["team1", "team2", "score"])
+        res = SL.execute_sql2([team1, team2],"scorerecord", ["team1", "team2"], ["team1", "team2", "score"], day=date)
     else:
         return {}
 
