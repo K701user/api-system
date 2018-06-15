@@ -524,7 +524,7 @@ class RecordAccumulation:
                                   datetime.datetime.now().strftime('%H%M%S'),
                                   td[3].string + "投球回" +
                                   td[4].string + "投球数で" +
-                                  "被安打が" + td[6].string +
+                                  "被安打が" + td[6].string + "で、" +
                                   td[8].string + "奪三振しています。" +
                                   "防御率は" + td[2].string + "です。"]
                         rec_list.append(record)
